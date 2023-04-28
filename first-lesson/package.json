@@ -1,0 +1,15 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "This new project nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Noémie",
+  "license": "ISC",
+  "dependencies": {
+    "marveljs": "^0.0.2",
+    "random": "^4.1.0"
+  }
+}
