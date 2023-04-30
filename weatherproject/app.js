@@ -1,6 +1,4 @@
-const {
-  response
-} = require("express");
+const {response} = require("express");
 const express = require("express");
 const bodyParse = require("body-parser");
 
