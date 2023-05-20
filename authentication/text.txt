@@ -1,0 +1,2 @@
+npm init
+npm i ejs body-parser mongoose mongodb express
