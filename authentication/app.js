@@ -1,4 +1,5 @@
 //jshint esversion:6
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
@@ -7,6 +8,8 @@ const mongoose = require('mongoose');
 const encrypt = require('mongoose-encryption')
 
 const app = express();
+console.log(process.env.API_KEY);
+
 
 app.set('view engine', 'ejs');
 
@@ -25,7 +28,7 @@ const userSchema = new mongoose.Schema({
 });
 //Doan code nay dung de ma hoa mat khau tranh bi hack 
 //https://www.npmjs.com/package/mongoose-encryption
-var secret = "Thisisa32bytebasestring";
+let secret =process.env.SECRET;
 userSchema.plugin(encrypt, { secret: secret,encryptedFields: ['password'] });
 
 const User = mongoose.model('User', userSchema);
