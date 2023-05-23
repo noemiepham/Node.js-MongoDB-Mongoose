@@ -6,10 +6,12 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 // tang tinh bao mat cau mat khau
 const encrypt = require('mongoose-encryption')
+//hash function ko cho hacker khong chuyen doi ma code tro lai duoc
+const md5 = require("md5")
 
 const app = express();
-console.log(process.env.API_KEY);
-
+//console.log(process.env.API_KEY);
+//console.log(md5(1234));
 
 app.set('view engine', 'ejs');
 
@@ -28,7 +30,7 @@ const userSchema = new mongoose.Schema({
 });
 //Doan code nay dung de ma hoa mat khau tranh bi hack 
 //https://www.npmjs.com/package/mongoose-encryption
-let secret =process.env.SECRET;
+const secret = process.env.SECRET;
 userSchema.plugin(encrypt, { secret: secret,encryptedFields: ['password'] });
 
 const User = mongoose.model('User', userSchema);
@@ -51,7 +53,9 @@ app.post("/register", (req, res)=> {
           email: req.body.username,
           password: req.body.password
      })
-     console.log(newUser);
+     console.log('register' + newUser.password);
+     
+
      newUser.save().then(()=>{
           res.render("secrets");
       }).catch((err)=>{
@@ -60,8 +64,9 @@ app.post("/register", (req, res)=> {
 })
 
 app.post("/login", (req, res)=>{
-     const username = req.body.usename;
+     const username = req.body.username;
      const password = req.body.password;
+     console.log(username);
 
      User.findOne({email: username}).then((err, foundUser) => {
           if(!err){
