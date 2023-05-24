@@ -81,9 +81,20 @@ app.post("/login", (req, res)=>{
      });
 })
 
+app.get("/logout", (req, res)=>{
+     res.redirect('/');
+})
 
-
-
+app.get('/submit', (req, res)=>{
+     if(req.isAuthenticated()){
+          res.render("submit");
+     }else {
+          res.redirect('/login')
+     }
+})
+app.post('/submit', (req, res)=>{
+     const submittedSecret = req.body.secret;
+})
 
 
 
